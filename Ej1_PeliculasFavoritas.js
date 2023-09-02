@@ -17,7 +17,7 @@ var usuario = {
     ]
     }
   
-  console.log('La segunda película favorita de ',usuario.nombre,' es ', usuario.peliculasFavoritas[2].titulo,
-  ' del año ',usuario.peliculasFavoritas[2].ano);
+  console.log('La segunda película favorita de ',usuario.nombre,' es ', usuario.peliculasFavoritas[1].titulo,
+  ' del año ',usuario.peliculasFavoritas[1].ano);
 
   
