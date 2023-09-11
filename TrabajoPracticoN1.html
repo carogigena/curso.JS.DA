@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ejemplo HTML y JavaScript</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="./js/TrabajoPracticoN1.js"></script>
+    </head>
+<body>
+
+    
+<h1>¡Hola, Mundo!</h1>
+<button id="miBoton" onclick="sumar()">Haz clic aquí</button>
+<p id="mensaje"></p>
+<script>
+    //JavaScript
+    document.getElementById("miBoton").addEventListener("click",function(){
+    document.getElementById("mensaje").innerHTML = "¡Has hecho clic en el botón!";
+    
+
+})
+</script>
+<label for="name">Name (4 to 8 characters):</label>
+
+<input type="text" id="name" name="name" required minlength="4" maxlength="8" size="10" />
+</body>
+</html>
