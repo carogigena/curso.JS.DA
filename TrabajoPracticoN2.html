@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+    <title>Trabajo Práctico Nº 2</title>
+    <style>
+        .resaltado {
+            background-color:yellow;
+        }
+    </style>
+</head>
+<script>
+$(document).ready(function () {
+/* 1- Seleccionar el primer y último elemento hijo <p> dentro del contenedor .container y
+cambiar su color de texto a rojo.*/
+    $(".container").children("p").first().css("color", "red");
+          $(".container").children("p").last().css("color", "red");
+/* 2- Trabajo practico numero 2, la consigna queda : 
+Seleccionar todos los elementos <span> que están dentro de un <div>  y cambiar su color de fondo a amarillo.*/
+           $("div").find("span").css("background-color", "yellow");
+/* 3- Seleccionar el tercer elemento <li> en la lista y cambiar su texto a "Nuevo
+Elemento"*/
+    $(".Ejercicio3").find("li").eq(2).text('Nuevo Elemento');
+/* 4 - Seleccionar todas las cajas .box que tienen una lista <ul> y agregar una clase CSS
+llamada "has-list" a esas cajas.*/
+   $(".box").has("ul").addClass("has-list");
+/* 5 - Seleccionar todas las listas <ul> que están dentro de las cajas .box y agregarles
+una clase CSS llamada "highlight".*/
+    $(".box").find("ul").addClass("highlight");
+/* 6 - Agregar un evento click a cada botón de manera que cuando se haga clic en un
+botón, se muestre un mensaje en una alerta que diga "¡Hiciste clic en el Botón X!",
+donde X es el número del botón.*/
+    
+        $(".btn").click(function(){
+            alert("¡Hiciste clic en el "+$(this).text()+" !");
+        })
+/* 7 -Crea un formulario de registro con campos como nombre, correo electrónico y
+contraseña. Utiliza eventos para validar los campos del formulario antes de permitir
+que el usuario lo envíe.*/
+        $("#validar").click(function () {
+            let textname='', textmail='',textpass='';
+        if($("#name").val()==='') {
+            textname=$("#lblName").text();
+            console.log(textname);
+        }
+        if($("#mail").val()==='') {
+            textmail=$("#lblMail").text();
+            console.log(textmail);
+        }
+        if($("#pass").val()==='') {
+            textpass=$("#lblPass").text();
+            console.log(textpass);
+        }
+        alert('Debe ingresar: '+textname+','+textmail+','+textpass);
+        })
+/* 8 - Crea una lista desplegable (select) con opciones. Utiliza eventos para mostrar
+información adicional sobre la opción seleccionada en DIV que esté al lado.*/
+$("#select").append('<option value="value0" selected>-</option>');
+$("#select").on('change', function() {
+  //console.log('You selected: ', this.value);
+  if(this.value==='value1'){
+    $("#selecDiv").text(" de 42 pulgadas")
+  }
+  else if(this.value==='value2'){
+    $("#selecDiv").text(" con frezzer, marca Gafa");
+  }
+  else if(this.value==='value3'){
+    $("#selecDiv").text(" con Centrifugado de 1000 rpm");
+  }
+  else {$("#selecDiv").text("")}
+});
+/* 9 - Implementar dos select dependientes : Al seleccionar el país se deben mostrar tres ciudades relacionadas (no es necesario
+consultar API aún)*/
+$("#paises").append('<option value="value0" selected>-</option>');
+$("#paises").on('change', function() {
+    $("#ciudades option").remove();
+    if(this.value==='usa'){
+        $("#ciudades").append('<option value= miami >Miami</option>');
+        $("#ciudades").append('<option value= newyork >New York</option>');
+  }
+  else if(this.value==='canada'){
+    $("#ciudades").append('<option value= toronto >Toronto</option>');
+    $("#ciudades").append('<option value= quebec >Quebec</option>');
+  }
+  else if(this.value==='mexico'){
+    $("#ciudades").append('<option value= guadalajara >Guadalajara</option>');
+    $("#ciudades").append('<option value= monterrey >Monterrey</option>');
+    $("#ciudades").append('<option value= cancun >Cancún</option>');
+  }
+  else{
+    $("#ciudades").append('<option value="value0" selected>-</option>');
+  }
+    
+    //$("#ciudades").add("Toronto");
+    //$("#ciudades").add("Miami");
+    });
+
+});
+
+</script>
+<body> Trabajo Practico N2
+    <div class="container">  <b>Ejercicio 1</b>
+        <p>Este es un párrafo.</p>
+        <ul>
+        <li>Elemento 1</li>
+        <li>Elemento 2</li>
+        </ul>
+        <p>Otro párrafo.</p>
+    </div>   
+    <hr/>
+    <div class="parent"> <b>Ejercicio 2</b>
+        <p>Párrafo 1</p>
+        <div>
+            <span>Texto 1</span>
+            <span>Texto 2</span>
+        </div>
+        <p>Párrafo 2</p>
+        <div>
+            <span>Texto 3</span>
+            <span>Texto 4</span>
+        </div>
+    </div>
+    <hr/>
+    <div class="Ejercicio3"> <b>Ejercicio 3</b>
+        <ul>
+            <li>Elemento 1</li>
+            <li>Elemento 2</li>
+            <li>Elemento 3</li>
+            <li>Elemento 4</li>
+            <li>Elemento 5</li>
+        </ul>    
+    </div>     
+    <hr/>
+    <div class="container1"><b>Ejercicio 4</b>
+        <div class="box">
+            <p>Elemento 1</p>
+            <ul>
+                <li>Item 1</li><li>Item 2</li>
+            </ul>
+        </div>
+        <div class="box">
+            <p>Elemento 2</p>
+            <ul>
+                <li>Item 3</li>
+                <li>Item 4</li>
+            </ul>
+        </div>
+    </div>
+    <hr/>
+    <div id="container2"><b>Ejercicio 5</b>
+        <div class="box">
+            <p>Elemento 1</p>
+            <ul>
+                <li>Item 1</li>
+                <li>Item 2</li>
+            </ul>
+            </div>
+            <div class="box">
+            <p>Elemento 2</p>
+            <ul>
+                <li>Item 3</li>
+                <li>Item 4</li>
+            </ul>
+        </div>
+    </div>
+    <hr/>
+    <div><b>Ejercicio 6</b>
+        <button class="btn" id="btn1">Botón 1</button>
+        <button class="btn" id="btn2">Botón 2</button>
+        <button class="btn" id="btn3">Botón 3</button>
+    </div>
+    <hr/>
+    <form id="formUsu" action="" > <b>Ejercicio 7</b>
+        <ul>
+          <li>
+            <label id="lblName">Nombre:</label>
+            <input type="text" id="name" name="user_name" />
+          </li>
+          <li>
+            <label id="lblMail">Correo electrónico:</label>
+            <input type="email" id="mail" name="user_mail" />
+          </li>
+          <li>
+            <label id="lblPass">Contraseña:</label>
+            <input type="password" id="pass" name="user_password"/>
+          </li>
+          <div>
+            <button id="validar" >Validar</button>
+          </div>
+        </ul>
+    </form>
+    <hr/>
+    <div><b>Ejercicio 8</b>
+        <select id="select">
+            <option value="value1">Televisor</option>
+            <option value="value2">Heladera</option>
+            <option value="value3">Lavarropa</option>
+        </select><label id="selecDiv"></label>
+    </div>
+    <hr/>
+    <div><b>Ejercicio 9</b>
+        <label for="paises">Selecciona un país:</label>
+            <select id="paises">
+            <option value="usa">Estados Unidos</option>
+            <option value="canada">Canadá</option>
+            <option value="mexico">México</option>
+            </select>
+        <label for="ciudades">Selecciona una ciudad:</label>
+        <select id="ciudades">
+        <!-- Opciones se agregarán dinámicamente aquí -->
+        </select>
+    </div>
+</body>
+</html>
