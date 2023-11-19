@@ -8,5 +8,6 @@ router.get('/getUsus', itemController.getUsus);
 router.get('/getText', topicsController.getText);
 router.post('/checkUsu', itemController.checkUsu);
 router.post('/addUsu', itemController.addUsu);
-router.post('/items/:id', itemController.getItemById);
+router.post('/items/:username', itemController.getItemById);
+router.post('/topic/:idtext', topicsController.getTopicsById);
 module.exports = router;
