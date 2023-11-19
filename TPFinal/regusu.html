@@ -36,34 +36,13 @@ $(document).ready(function(){
         $('#respuesta').text('Usuario o contraseña incorrecta.');  
     } else if (response==="1"){$('#respuesta').text('Error al obtener el Usuario.');}
     else {$('#respuesta').text(response)
-   // location.href="C:/Caro/JavaScript/TPFinal/index.html";
+    location.href="C:/Caro/JavaScript/TPFinal/index.html";
   }
       
     })
   })
 
-  const parent = document.getElementById("entries");
-parent.style.width = '150px';
-parent.style.height = '150px';
-parent.style.backgroundColor = 'red';
-
-document.getElementById("newEntry").addEventListener("click", newEntry);
-
-function newEntry() {
-  console.log('paso');
-    var newDiv = document.createElement("div");
-    newDiv.style.width = '50px';
-    newDiv.style.height = '50px';
-    newDiv.textContent = 'Entry';
-    newDiv.style.backgroundColor = 'white';
-    parent.appendChild(newDiv);
-}
-function codigoHTML() {
-        div = document.getElementById("resultado");
-        texto = document.getElementById("texto").value;
-        div.innerHTML = texto;
-    }
-});
+  });
 
 
 </script>
@@ -97,14 +76,6 @@ function codigoHTML() {
   </div>
   </div>
 <div id="respuesta"></div>
-<a href="C:/Caro/JavaScript/TPFinal/otro2.html">
-  <button>freeCodeCamp</button>
-</a> 
-<div id="entries"></div>
-<button id="newEntry">new Entry</button>
-<div>
-  <textarea onkeyup="codigoHTML();" name="" id="texto" cols="30" rows="10"></textarea>
-  <div id="resultado"></div>
-</div>
+
 </body>
 </html>
