@@ -60,7 +60,8 @@ module.exports = {
     try {
       const newItem = await item.save();
       res.status(201).json(newItem);
-      res.json('Usuario registrado correctamente');
+      //res.json(newItem.name);
+      //res.json('Usuario registrado correctamente');
     } catch (error) {
       console.error('Error al agregar el elemento:', error);
       res.status(500).json({ message: 'Error interno del servidor' });
