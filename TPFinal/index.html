@@ -26,7 +26,7 @@ $(document).ready(function(){
     // Obtener los datos del formulario serialize es de JQuery y convierte en tipo dato/valor
     const formData = $(this).serialize();
     //Realiza la solicitud POST
-    //let response;
+
     $.post('http://localhost:3000/api/checkUsu',formData,function(response){
       if (response==="0"){
         $('#respuesta').text('Usuario o contraseña incorrecta.');  
