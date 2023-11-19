@@ -26,14 +26,15 @@ module.exports = {
     }
   },
   getItemById: async (req, res) => {
-    const itemId = req.params.id;
+    const itemId = req.params.username;
+    console.log(itemId)
     try {
-      const item = await Item.findById(itemId);
+      const item = await Item.find({ username: itemId})
       console.log(item);
       if (!item){
       return res.status(404).json({message:'Elemento no encontrado'});
       }
-      res.json(item.email);
+      res.json(item);
     } catch (error) {
       console.error('Error al obtener los elementos por Id:', error);
       res.status(500).json({ message: 'Error interno del servidor' });

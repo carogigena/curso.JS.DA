@@ -13,17 +13,30 @@ module.exports = {
     }
   },
   getTopicsById: async (req, res) => {
-    const itemId = req.params.subject;
+    const itemId = req.params.idtext;
     try {
-      const item = await Item.findById(itemId);
-      console.log(item);
+      const item = await Topics.find({ idtext: itemId})
+      console.log(item[0].text);
       if (!item){
       return res.status(404).json({message:'Elemento no encontrado'});
       }
-      res.json(item.text);
+      res.json(item[0].text);
     } catch (error) {
       console.error('Error al obtener los elementos por Id:', error);
       res.status(500).json({ message: 'Error interno del servidor' });
     }
+    /*console.log(req.params.id);
+    const itemId = req.params.id;
+    try {
+      const item = await Topics.findById(itemId);
+     // console.log(item);
+      if (!item){
+      return res.status(404).json({message:'Elemento no encontrado'});
+      }
+      res.json(item);
+    } catch (error) {
+      console.error('Error al obtener los elementos por Id:', error);
+      res.status(500).json({ message: 'Error interno del servidor' });
+    }*/
   },
 };
