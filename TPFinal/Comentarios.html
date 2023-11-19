@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html lang="es-ES">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--JQUERY-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js""></script>
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  
+  <!-- Los iconos tipo Solid de Fontawesome-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+  <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+  <!-- Nuestro css
+  <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">-->
+  
+  <link rel="stylesheet" href="css/estilos2.css">
+  <title>Comentarios</title>
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">-->
+<script>
+  $(document).ready(function(){
+    const formData = $(this).serialize();
+        $.get('http://localhost:3000/api/getText',function(response){
+          $('#text').text(response[1].text);
+          console.log(response[1].text);
+        })
+    /*var input = document.createElement('input');
+    var contenedor = document.getElementById('almacenar');
+    var salto = document.createElement('div');
+    let param = location.search.substr(1);*/
+document.getElementById("newEntry").addEventListener("click", newEntry);
+var division = document.getElementById("almacenar");
+
+  function newEntry() {
+    //contenedor.append(salto);//todo lo agrego al div de almacenar
+    //contenedor.append(input);
+
+    /*var newt = document.createElement("div");
+    newt.style.cssText='media d-flex flex-direction-column'; 
+    var otrodiv =document.createElement("div");
+    otrodiv.style.cssText="flex-grow-1 ms-0";
+    var t = document.createTextNode(document.getElementById('entrada').value);       
+    newt.appendChild(t);                                         
+    document.getElementById("almacenar").appendChild(newt); 
+    */
+    var divUsu = document.createElement("p");
+  divUsu.setAttribute("id", "divusu");
+  divUsu.setAttribute("class", "name");
+  //division.appendChild(divUsu);
+  //divUsu.textContent = param;
+  var divComent = document.createElement("div");
+  divComent.setAttribute("id", "nuevodiv");
+  divComent.setAttribute("class", "media d-flex flex-direction-column");
+  division.appendChild(divComent);
+  divComent.appendChild(divUsu);
+  
+
+  //division.appendChild(divUsu);
+  divComent.textContent = document.getElementById('entrada').value;
+  divUsu.textContent=param;
+  
+  
+
+}
+
+});
+</script>
+</head>
+
+<body>
+  <div class="container">
+    <br>
+    <p class="comment" id="text">
+      
+    </p>
+    
+    <div class="row comments justify-content-center">
+      <div class="col" id="almacenar">
+
+        <form class="form_comments d-flex justify-content-end flex-wrap">
+          <textarea placeholder="Comentario" id="entrada"></textarea>
+          <button class="btn" type="button" id="newEntry">Comentar</button>
+        </form>
+        <!--conservé "media" ya que aparece en los estilos; flex-direction-column para tomar la dirección de arriba para abajo (no de izquierda a derecha)-->
+        <div class="media d-flex flex-direction-column" >
+          <!--<div class="flex-shrink-0">
+            <img src="https://via.placeholder.com/64" alt="Karina" class="align-self-center">
+          </div>-->
+          <!--flex-grow se utiliza para que un elemento flex crezca hasta rellenar el espacio disponible
+          ms (margin start) reemplaza a ml (margin left): https://getbootstrap.com/docs/5.0/getting-started/rtl/#approach-->
+          <div class="flex-grow-1 ms-0">
+            <p class="name" id="usuname"> Pedro <span>11:56, hoy</span></p>
+            <p class="comment">
+              Primer Comentario.
+            </p>
+            <!--flex-direction-row para tomar la dirección de izquierda a derecha; justify-content-end para alinear los componentes a la derecha-->
+            <div class="buttons text-end d-flex flex-direction-row justify-content-end">
+              <a href="#">Responder</a>
+              <a href="#">Editar</a>
+              <a href="#">Eliminar</a>
+            </div>
+
+            <!--<div class="media d-flex flex-direction-column">
+              flex-shrink por su parte se utiliza para que un elemento flex se encoja, de ser necesario. Si su valor es cero, no se encogerá cuando la página se haga más pequeña 
+              <div class="flex-shrink-0">
+                <img src="https://via.placeholder.com/64" alt="Karina" class="d-flex align-self-center">
+              </div>
+              <div class="flex-grow-1 ms-0">
+                <p class="name">Karina <span>22:56, hoy</span></p>
+                <p class="comment">
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis eos dolore optio!
+                </p>
+                <div class="buttons text-end d-flex flex-direction-row justify-content-end">
+                  <a href="#">Responder</a>
+                  <a href="#">Editar</a>
+                  <a href="#">Eliminar</a>
+                </div>
+              </div>
+            </div>-->
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

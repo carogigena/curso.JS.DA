@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Blog </title>
+
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js""></script>
+    
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <!-- Los iconos tipo Solid de Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <!-- Nuestro css-->
+    <link rel="stylesheet" type="text/css" href="static/css/index.css" th:href="@{/css/index.css}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  //Maneja el envío del formulario con JQuery
+  $('#miFormulario').submit(function(event){
+    event.preventDefault();//Evita que el formulario se envíe normalemnte
+    
+    // Obtener los datos del formulario serialize es de JQuery y convierte en tipo dato/valor
+    const formData = $(this).serialize();
+    /*const formData = {
+          username: $("#username").val(),
+           email: $("#email").val(),
+           password: $("#password").val()
+         };*/
+    //Realiza la solicitud POST
+    $.post('http://localhost:3000/api/addUsu',formData,function(response){
+      if (response==="0"){
+        $('#respuesta').text('Usuario o contraseña incorrecta.');  
+    } else if (response==="1"){$('#respuesta').text('Error al obtener el Usuario.');}
+    else {$('#respuesta').text(response)
+   // location.href="C:/Caro/JavaScript/TPFinal/index.html";
+  }
+      
+    })
+  })
+
+  const parent = document.getElementById("entries");
+parent.style.width = '150px';
+parent.style.height = '150px';
+parent.style.backgroundColor = 'red';
+
+document.getElementById("newEntry").addEventListener("click", newEntry);
+
+function newEntry() {
+  console.log('paso');
+    var newDiv = document.createElement("div");
+    newDiv.style.width = '50px';
+    newDiv.style.height = '50px';
+    newDiv.textContent = 'Entry';
+    newDiv.style.backgroundColor = 'white';
+    parent.appendChild(newDiv);
+}
+function codigoHTML() {
+        div = document.getElementById("resultado");
+        texto = document.getElementById("texto").value;
+        div.innerHTML = texto;
+    }
+});
+
+
+</script>
+</head>
+<body>
+  <div class="modal-dialog text-center">
+  <div class="col-sm-8 main-section">
+  <div class="modal-content">
+  <div class="col-12 user-img">
+    <img src="img/user.png" th:src="@{/assets/login.png}"/>
+</div>
+<form class="col-12" id="miFormulario">
+  <div class="form-group" id="user-group">
+    <input type="text"  name="name" id="name" class="form-control" placeholder="Nombre" required>
+  </div>
+  <div class="form-group" id="user-group">
+    <input type="text"  name="lastname" id="lastname" class="form-control" placeholder="Apellido" required>
+  </div>
+  <div class="form-group" id="user-group">
+    <input type="email"  name="email" id="email" class="form-control" placeholder="correo electrónico" required>
+  </div>
+  <div class="form-group" id="user-group">
+    <input type="text"  name="username" id="username" class="form-control" placeholder="Nombre de usuario" required>
+  </div> 
+  <div class="form-group" id="contrasena-group">
+  <input type="password" name="password" id="password" required>
+  </div>
+  <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Registrarme </button>
+</form>
+</div>
+  </div>
+  </div>
+<div id="respuesta"></div>
+<a href="C:/Caro/JavaScript/TPFinal/otro2.html">
+  <button>freeCodeCamp</button>
+</a> 
+<div id="entries"></div>
+<button id="newEntry">new Entry</button>
+<div>
+  <textarea onkeyup="codigoHTML();" name="" id="texto" cols="30" rows="10"></textarea>
+  <div id="resultado"></div>
+</div>
+</body>
+</html>
