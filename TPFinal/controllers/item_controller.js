@@ -20,7 +20,7 @@ module.exports = {
       const item = await Item.find({"username":user,"password":pass});
       if (item.length===0){
         return res.json('0');
-      }else {res.json(item[0].name);}
+      }else {res.json(item[0].username);}
     } catch (error) {
       return res.json('1');
     }
