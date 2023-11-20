@@ -101,20 +101,33 @@
       $(document).ready(function(){
         //Maneja el envío del formulario con JQuery
         let param = location.search.substr(1);
-        $('#bienvenido').text('Hola '+param+' !');
-        console.log(param);
         const formData = $(this).serialize();
+        $.post('http://localhost:3000/api/items/'+param,formData,function(response){
+        let name=response[0].name;
+          console.log(response[0].name);
+          $('#bienvenido').text('Hola '+name+' !');
+          $('#bienvenido').attr('username',response[0].username);
+          console.log($('#bienvenido').attr('username'));
+        })
+       
+        //console.log(param);
+        
         $('#miFormulario').submit(function(event){
           event.preventDefault();//Evita que el formulario se envíe normalemnte
-          
-          // Obtener los datos del formulario serialize es de JQuery y convierte en tipo dato/valor
-          const formData = $(this).serialize();
-        
-          //Realiza la solicitud POST
-          location.href="C:/Caro/JavaScript/TPFinal/Comentarios.html?"+param;
+           //Realiza la solicitud POST
+          location.href="C:/Caro/JavaScript/TPFinal/Comentarios.html?idtext="+$('#button').attr('theme')+'&username='+$('#bienvenido').attr('username');
 
         })
-      
+        
+        $('#Comentarios0').click(function() {
+          $('#button').attr('theme',$(this).attr('theme'));
+        });
+        $('#Comentarios1').click(function() {
+          $('#button').attr('theme',$(this).attr('theme'));
+        });
+        $('#Comentarios2').click(function() {
+          $('#button').attr('theme',$(this).attr('theme'));
+        });
      
       });
       
@@ -231,16 +244,19 @@
   
   <div class="container px-4 py-5" id="featured-3">
     
-    <h2 class="pb-2 border-bottom" id="bienvenido"></h2>
+    <h2 class="pb-2 border-bottom" id="bienvenido" username="uull"></h2>
     <!--<div class="row g-4 py-5 row-cols-1 row-cols-lg-3">-->
       <form class="row g-4 py-5 row-cols-1 row-cols-lg-3" id="miFormulario" username="">
+        <input type="hidden" value="" name="username" />
+        <input id="button" type="hidden" value="" />
       <div class="feature col">
         <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
           <svg class="bi" width="1em" height="1em"><use xlink:href="#collection"/></svg>
         </div>
         <h3 class="fs-2 text-body-emphasis">Inteligencia Artificial</h3>
         <p id="AI"></p>
-        <a href="C:/Caro/JavaScript/TPFinal/Comentarios.html?idtext=0&username=cgigena" id="0" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Leer artículo </a>
+        <!--<a href="C:/Caro/JavaScript/TPFinal/Comentarios.html?idtext=0&username=cgigena" id="0" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Leer artículo </a>-->
+        <button  id="Comentarios0" type="submit" class="btn btn-primary" theme="0"><i class="fas fa-sign-in-alt"></i>  Leer artículo </button>
       </div>
       <div class="feature col">
         <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
@@ -248,19 +264,21 @@
         </div>
         <h3 class="fs-2 text-body-emphasis">Nunca más Milei</h3>
         <p></p>
-        <a href="C:/Caro/JavaScript/TPFinal/Comentarios.html?idtext=1&username=cgigena" id="0" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Leer artículo </a>
+        <button  id="Comentarios1" type="submit" class="btn btn-primary" theme="1"><i class="fas fa-sign-in-alt"></i>  Leer artículo </button>
+        <!--<a href="C:/Caro/JavaScript/TPFinal/Comentarios.html?idtext=1&username=cgigena" id="0" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Leer artículo </a>-->
       </div>
       <div class="feature col">
         <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
           <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"/></svg>
         </div>
         <h3 class="fs-2 text-body-emphasis">Mas educación menos violencia</h3>
-        <a href="C:/Caro/JavaScript/TPFinal/Comentarios.html?idtext=2&username=cgigena" id="2" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Leer artículo </a>
+        <button  id="Comentarios2" type="submit" class="btn btn-primary" theme="2"><i class="fas fa-sign-in-alt"></i>  Leer artículo </button>
+        <!--<a href="C:/Caro/JavaScript/TPFinal/Comentarios.html?idtext=2&username=cgigena" id="2" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Leer artículo </a>-->
       </div>
-    </form>
+    
     <!--</div>-->
   </div>
-
+</form>
 </main>
 <script src="C:/Caro/JavaScript/TPFinal/assets/dist/js/bootstrap.bundle.min.js"></script>
 
