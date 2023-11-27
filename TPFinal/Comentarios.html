@@ -39,10 +39,20 @@ var idusu = urlParams.get('username');
     $.get('http://localhost:3000/api/getText',function(response){
           //console.log(response);
           $('#text').text(response[idtext].text);
-          
+          console.log(response[idtext].comments.length);
+          $('#usuname').text(response[idtext].comments[0].userName);
+          $('#comment').text(response[idtext].comments[0].comment);
+          /*<div class="media d-flex flex-direction-column" >
+          <div class="flex-grow-1 ms-0">
+            <p class="name" id="usuname"> Pedro <span>11:56, hoy</span></p>
+            <p class="comment" id="comment">
+              Primer Comentario.
+            </p>
+          </div>*/
           })
     $.post('http://localhost:3000/api/items/cgigena',formData,function(response){
         let name=$('#name').text(response[0].name);
+        $('#text').text(response[idtext].text);
           console.log(response[0].name);
         })
     /*var input = document.createElement('input');
@@ -79,8 +89,16 @@ var division = document.getElementById("almacenar");
   var divUsu = document.createElement("div");
     divUsu.setAttribute("id", "usuname");
     divUsu.setAttribute("class", "name");
+    divUsu.textContent = name;
     division.appendChild(divUsu);
-    divUsu.textContent = document.getElementById('entrada').value;;
+
+    var divComment = document.createElement("div");
+    divComment.setAttribute("id", "comment");
+    divComment.setAttribute("class", "comment");
+    divComment.textContent = document.getElementById('entrada').value;
+    document.getElementById('entrada').value='';
+    division.appendChild(divComment);
+   
   //divComent.appendChild(divUsu);
   //<p class="name" id="usuname"> Pedro <span>11:56, hoy</span></p>
 
@@ -100,9 +118,10 @@ var division = document.getElementById("almacenar");
 <body>
   <div class="container">
     <br>
+    <p class="comment" id="name"> 
+    </p>
      <br>
-    <p class="comment" id="text">
-      
+    <p class="comment" id="text"> 
     </p>
     
     <div class="row comments justify-content-center">
@@ -116,16 +135,16 @@ var division = document.getElementById("almacenar");
         <div class="media d-flex flex-direction-column" >
           <div class="flex-grow-1 ms-0">
             <p class="name" id="usuname"> Pedro <span>11:56, hoy</span></p>
-            <p class="comment">
+            <p class="comment" id="comment">
               Primer Comentario.
             </p>
-          <div class="buttons text-end d-flex flex-direction-row justify-content-end">
+        <!--  <div class="buttons text-end d-flex flex-direction-row justify-content-end">
               <a href="#">Responder</a>
               <a href="#">Editar</a>
               <a href="#">Eliminar</a>
           </div>
 
-        <!--<div class="media d-flex flex-direction-column">
+          <div class="media d-flex flex-direction-column">
               <div class="flex-grow-1 ms-0">
                 <p class="name">Karina <span>22:56, hoy</span></p>
                 <p class="comment">
