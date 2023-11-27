@@ -40,8 +40,9 @@ var idusu = urlParams.get('username');
           //console.log(response);
           $('#text').text(response[idtext].text);
           console.log(response[idtext].comments.length);
+         if (response[idtext].comments.length>0){
           $('#usuname').text(response[idtext].comments[0].userName);
-          $('#comment').text(response[idtext].comments[0].comment);
+          $('#comment').text(response[idtext].comments[0].comment);}
           /*<div class="media d-flex flex-direction-column" >
           <div class="flex-grow-1 ms-0">
             <p class="name" id="usuname"> Pedro <span>11:56, hoy</span></p>
@@ -52,8 +53,8 @@ var idusu = urlParams.get('username');
           })
     $.post('http://localhost:3000/api/items/cgigena',formData,function(response){
         let name=$('#name').text(response[0].name);
-        $('#text').text(response[idtext].text);
-          console.log(response[0].name);
+       //$('#text').text(response[idtext].text);
+         // console.log(response[0].name);
         })
     /*var input = document.createElement('input');
     var contenedor = document.getElementById('almacenar');
