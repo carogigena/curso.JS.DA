@@ -10,4 +10,5 @@ router.post('/checkUsu', itemController.checkUsu);
 router.post('/addUsu', itemController.addUsu);
 router.post('/items/:username', itemController.getItemById);
 router.post('/topic/:idtext', topicsController.getTopicsById);
+router.post('/addTopic', topicsController.addTopic);
 module.exports = router;
