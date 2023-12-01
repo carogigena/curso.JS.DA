@@ -25,91 +25,55 @@
 <script>
   $(document).ready(function(){
     let param = location.search;
-    console.log(param);
+    //console.log(param);
     const urlParams = new URLSearchParams(param);
 
 //Accedemos a los valores
 var idtext = urlParams.get('idtext');
 var idusu = urlParams.get('username');
 
-//console.log(idtext);
-//console.log(idusu);
-
     const formData = $(this).serialize();
+    let userName=[];
     $.get('http://localhost:3000/api/getText',function(response){
-          //console.log(response);
-          $('#text').text(response[idtext].text);
-          console.log(response[idtext].comments.length);
+        $('#text').text(response[idtext].text);
+        var nameComent;
          if (response[idtext].comments.length>0){
-          $('#usuname').text(response[idtext].comments[0].userName);
-          $('#comment').text(response[idtext].comments[0].comment);}
-          /*<div class="media d-flex flex-direction-column" >
-          <div class="flex-grow-1 ms-0">
-            <p class="name" id="usuname"> Pedro <span>11:56, hoy</span></p>
-            <p class="comment" id="comment">
-              Primer Comentario.
-            </p>
-          </div>*/
-          })
-    $.post('http://localhost:3000/api/items/cgigena',formData,function(response){
+          for($i=0;$i<response[idtext].comments.length;$i++){
+            let prueba=response[idtext].comments[$i].comment;
+          
+            userName.push(response[idtext].comments[$i].userName);
+            $.post('http://localhost:3000/api/items/'+userName[$i],prueba,function(response2){
+              nameComent=response2[0].name;
+              $('#almacenar').append(`
+              <div class="media d-flex flex-direction-column" >
+                <div class="flex-grow-1 ms-0">
+                  <p class="name" id="usuname"> ${response2[0].name} </p>
+                  <p class="comment" id="comment">
+                    ${prueba}
+                  </p>
+                </div>
+              </div>`);
+      })
+          }
+         }
+    })
+    $.post('http://localhost:3000/api/items/'+idusu,function(response){
         let name=$('#name').text(response[0].name);
-       //$('#text').text(response[idtext].text);
-         // console.log(response[0].name);
-        })
-    /*var input = document.createElement('input');
-    var contenedor = document.getElementById('almacenar');
-    var salto = document.createElement('div');
-    let param = location.search.substr(1);*/
-document.getElementById("newEntry").addEventListener("click", newEntry);
-var division = document.getElementById("almacenar");
-
-  function newEntry() {
-    //contenedor.append(salto);//todo lo agrego al div de almacenar
-    //contenedor.append(input);
-
-    /*var newt = document.createElement("div");
-    newt.style.cssText='media d-flex flex-direction-column'; 
-    var otrodiv =document.createElement("div");
-    otrodiv.style.cssText="flex-grow-1 ms-0";
-    var t = document.createTextNode(document.getElementById('entrada').value);       
-    newt.appendChild(t);                                         
-    document.getElementById("almacenar").appendChild(newt); 
-    */
-  name=$('#name').text();
-  // console.log($('#name').text());
-  /*var divUsu = document.createElement("p");
-    divUsu.setAttribute("id", "divusu");
-    divUsu.setAttribute("class", "name");
-    division.appendChild(divUsu);
-    divUsu.textContent = name;*/
-  var divLine = document.createElement("div");
-    divLine.setAttribute("id", "nuevodiv");
-    divLine.setAttribute("class", "media d-flex flex-direction-column");
-    division.appendChild(divLine);
-    
-  var divUsu = document.createElement("div");
-    divUsu.setAttribute("id", "usuname");
-    divUsu.setAttribute("class", "name");
-    divUsu.textContent = name;
-    division.appendChild(divUsu);
-
-    var divComment = document.createElement("div");
-    divComment.setAttribute("id", "comment");
-    divComment.setAttribute("class", "comment");
-    divComment.textContent = document.getElementById('entrada').value;
+    })
+    document.getElementById("newEntry").addEventListener("click", newEntry);
+    function newEntry() {
+      userName=$('#name').text();
+      $comentario=document.getElementById('entrada').value;
+      $('#almacenar').append(`<div class="media d-flex flex-direction-column" >
+        <div class="flex-grow-1 ms-0">
+              <p class="name" id="usuname"> ${userName} </p>
+              <p class="comment" id="comment">
+                ${$comentario}
+              </p>
+            </div>
+        </div>`)
     document.getElementById('entrada').value='';
-    division.appendChild(divComment);
-   
-  //divComent.appendChild(divUsu);
-  //<p class="name" id="usuname"> Pedro <span>11:56, hoy</span></p>
-
-
-  /*division.appendChild(divUsu);
-  divUsu.textContent = name;*/
-  //divUsu.textContent=document.getElementById('entrada').value;
-  
-  
-
+    
 }
 
 });
@@ -133,13 +97,19 @@ var division = document.getElementById("almacenar");
           <button class="btn" type="button" id="newEntry">Comentar</button>
         </form>
         <!--conservé "media" ya que aparece en los estilos; flex-direction-column para tomar la dirección de arriba para abajo (no de izquierda a derecha)-->
-        <div class="media d-flex flex-direction-column" >
+        <!--
+          <div class="media d-flex flex-direction-column" >
           <div class="flex-grow-1 ms-0">
             <p class="name" id="usuname"> Pedro <span>11:56, hoy</span></p>
             <p class="comment" id="comment">
               Primer Comentario.
             </p>
-        <!--  <div class="buttons text-end d-flex flex-direction-row justify-content-end">
+          </div>
+        </div>
+      -->
+  </div>
+</body>
+<!--  <div class="buttons text-end d-flex flex-direction-row justify-content-end">
               <a href="#">Responder</a>
               <a href="#">Editar</a>
               <a href="#">Eliminar</a>
@@ -160,10 +130,4 @@ var division = document.getElementById("almacenar");
             </div>
           </div>
         </div>-->
-        
-      </div>
-    </div>
-  </div>
-</body>
-
 </html>
