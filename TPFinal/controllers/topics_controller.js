@@ -39,4 +39,26 @@ module.exports = {
       res.status(500).json({ message: 'Error interno del servidor' });
     }*/
   },
+  addTopic: async (req, res) => {
+
+    const { idtext,comment } = req.body;
+   // console.log(req.body);
+    if (!comment) {
+      return res.status(400).json({ message: 'Todos los campos son obligatorios' });
+    }
+
+    const comments = new Topics({
+      comments
+    });
+    /*
+    try {
+      const newItem = await item.save();
+      res.status(201).json(newItem);
+      //res.json(newItem.name);
+      //res.json('Usuario registrado correctamente');
+    } catch (error) {
+      console.error('Error al agregar el elemento:', error);
+      res.status(500).json({ message: 'Error interno del servidor' });
+    }*/
+  },
 };

@@ -5,13 +5,15 @@ module.exports = {
   getUsus: async (req, res) => {
     try {
       const items = await Item.find();
-      console.log(items);
+      //console.log(items);
       res.json(items);
     } catch (error) {
       console.error('Error al obtener los elementos:', error);
       res.status(500).json({ message: 'Error interno del servidor' });
     }
   },
+
+  
   checkUsu: async (req, res) => {
     const { username,password,email} = req.body;
     let user =username;
@@ -27,10 +29,10 @@ module.exports = {
   },
   getItemById: async (req, res) => {
     const itemId = req.params.username;
-    console.log(itemId)
+    //console.log(itemId)
     try {
       const item = await Item.find({ username: itemId})
-      console.log(item);
+     // console.log(item);
       if (!item){
       return res.status(404).json({message:'Elemento no encontrado'});
       }
@@ -45,7 +47,7 @@ module.exports = {
   addUsu: async (req, res) => {
 
     const { name, lastname,email, password, username } = req.body;
-    console.log(req.body);
+   // console.log(req.body);
     if (!email || !password || !username ||!name ||!lastname) {
       return res.status(400).json({ message: 'Todos los campos son obligatorios' });
     }
