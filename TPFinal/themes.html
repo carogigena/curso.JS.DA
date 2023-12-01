@@ -104,10 +104,10 @@
         const formData = $(this).serialize();
         $.post('http://localhost:3000/api/items/'+param,formData,function(response){
         let name=response[0].name;
-          console.log(response[0].name);
+          //console.log(response[0].name);
           $('#bienvenido').text('Hola '+name+' !');
           $('#bienvenido').attr('username',response[0].username);
-          console.log($('#bienvenido').attr('username'));
+          //console.log($('#bienvenido').attr('username'));
         })
        
         //console.log(param);
